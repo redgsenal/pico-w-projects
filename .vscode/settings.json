@@ -1,0 +1,4 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/wifi_connect",
+    "python.defaultInterpreterPath": "python"
+}
