@@ -3,9 +3,9 @@ import network
 import ubinascii
 import machine
 # import urequest as request
-import time 
+import time
 from wificonfig import wificonfig
-import socket 
+import socket
 
 # Set country to avoid possible errors
 rp2.country('SG')
@@ -16,7 +16,7 @@ wlan.active(True)
 # wlan.config(pm = 0xa11140)
 
 # See the MAC address in the wireless chip OTP
-mac = ubinascii.hexlify(network.WLAN().config('mac'),':').decode()
+mac = ubinascii.hexlify(network.WLAN().config('mac'), ':').decode()
 print('mac = ' + mac)
 
 # Other things to query
@@ -39,7 +39,9 @@ while timeout > 0:
     print('Waiting for connection...')
     time.sleep(1)
 
-# Define blinking function for onboard LED to indicate error codes    
+# Define blinking function for onboard LED to indicate error codes
+
+
 def blink_onboard_led(num_blinks):
     led = machine.Pin('LED', machine.Pin.OUT)
     for i in range(num_blinks):
@@ -47,7 +49,7 @@ def blink_onboard_led(num_blinks):
         time.sleep(.2)
         led.off()
         time.sleep(.2)
-    
+
 # Handle connection error
 # Error meanings
 # 0  Link Down
@@ -58,6 +60,7 @@ def blink_onboard_led(num_blinks):
 # -2 Link NoNet
 # -3 Link BadAuth
 
+
 wlan_status = wlan.status()
 blink_onboard_led(wlan_status)
 
@@ -67,13 +70,16 @@ else:
     print('Connected')
     status = wlan.ifconfig()
     print('ip = ' + status[0])
-    
-# Function to load in html page    
+
+# Function to load in html page
+
+
 def get_html(html_name):
     with open(html_name, 'r') as file:
         html = file.read()
-        
+
     return html
+
 
 # HTTP server with socket
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
@@ -92,7 +98,7 @@ while True:
         print('Client connected from', addr)
         r = cl.recv(1024)
         # print(r)
-        
+
         r = str(r)
         print(r)
         led_on = r.find('led=on')
@@ -102,21 +108,21 @@ while True:
         if led_on > -1:
             print('LED ON')
             led.value(1)
-            
+
         if led_off > -1:
             print('LED OFF')
             led.value(0)
-            
+
         response = get_html('index.html')
         cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
         cl.send(response)
         cl.close()
-        
+
     except OSError as e:
         cl.close()
         print('Connection closed')
 
 # Make GET request
-#request = requests.get('http://www.google.com')
-#print(request.content)
-#request.close()
+# request = requests.get('http://www.google.com')
+# print(request.content)
+# request.close()
