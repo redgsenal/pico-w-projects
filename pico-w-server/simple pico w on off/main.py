@@ -30,13 +30,13 @@ pw = wificonfig['pw']
 
 wlan.connect(ssid, pw)
 
-# Wait for connection with 10 second timeout
-timeout = 10
+# Wait for connection with 30 second timeout
+timeout = 30
 while timeout > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
         break
     timeout -= 1
-    print('Waiting for connection...')
+    print("Waiting for connection...".format(timeout))
     time.sleep(1)
 
 # Define blinking function for onboard LED to indicate error codes
