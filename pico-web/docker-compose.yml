@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  pico-w:
+    image: php:8.1-apache
+    build:
+      context: .
+    restart: 'no'
+    ports:
+      - "8086:80"
+    volumes:
+      - ./projects:/home/projects
+      - ./pico-sdk:/home/pico-sdk
+    environment:
+      PICO_SDK_PATH: /home/pico-sdk
+  #database
+  db:
+    image: mysql
+    volumes:
+      - ./mysql_data:/var/lib/mysql      
+    restart: 'no'
+    ports:
+      - "3089:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: LP4Y7hbH50cVB6Mp
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: RaOo81243er6KFZ9
+    networks:
+      - pico-w
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: 'no'
+    ports:
+    - "8089:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: LP4Y7hbH50cVB6Mp
+    networks:
+      - pico-w
+networks:
+  pico-w:
+volumes:
+  db_data:
