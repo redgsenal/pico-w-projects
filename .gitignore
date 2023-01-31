@@ -1,1 +1,5 @@
-/blink/build
+/**/build
+/pico-w-server/lib/wificonfig.py
+/pico-web/mysql_data
+/pico-web/pico-sdk
+/pico-web/projects/venv

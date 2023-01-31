@@ -1,0 +1,38 @@
+{
+  "name": "pico-w-lcd",
+  "version": "1.0.0",
+  "description": "Pico W LCD SPFD5408A",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redgsenal/pico-w-lcd.git"
+  },
+  "keywords": [
+    "pico",
+    "pico",
+    "w",
+    "lcd",
+    "spfd5408a"
+  ],
+  "author": "reggie.senal@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redgsenal/pico-w-lcd/issues"
+  },
+  "homepage": "https://github.com/redgsenal/pico-w-lcd#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-basic-auth": "^1.2.1",
+    "express-handlebars": "^6.0.6",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.0.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
