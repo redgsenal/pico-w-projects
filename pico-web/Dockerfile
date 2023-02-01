@@ -13,7 +13,11 @@ RUN apt-get update; \
 
 RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - &&\
 	apt-get update && \
-	apt-get install -y nodejs && \
+	apt remove nodejs &&\
+	rm -rf /usr/local/bin/node* &&\
+	rm -rf /usr/local/bin/npm* &&\
+	rm -rf /etc/apt/sources.list.d/nodesource.list &&\
+	apt-get install -y nodejs &&\
 	apt-get install -y npm
 
 RUN	cd /tmp && \
