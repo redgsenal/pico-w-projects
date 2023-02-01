@@ -30,6 +30,10 @@ pw = wificonfig['pw']
 
 wlan.connect(ssid, pw)
 
+#setup LEDs
+led = machine.Pin('LED', machine.Pin.OUT)
+redLed = machine.Pin(15, machine.Pin.OUT)
+
 # Wait for connection with 10 second timeout
 timeout = 10
 while timeout > 0:
@@ -38,6 +42,7 @@ while timeout > 0:
     timeout -= 1
     print('Waiting for connection...')
     time.sleep(1)
+    redLed.toggle()
 
 # Define blinking function for onboard LED to indicate error codes
 
@@ -70,6 +75,7 @@ else:
     print('Connected')
     status = wlan.ifconfig()
     print('ip = ' + status[0])
+    led.on()
 
 # Function to load in html page
 
@@ -89,17 +95,16 @@ s.bind(addr)
 s.listen(1)
 
 print('Listening on', addr)
-led = machine.Pin('LED', machine.Pin.OUT)
 
 # Listen for connections
 while True:
     try:
         cl, addr = s.accept()
         print('Client connected from', addr)
-        r = cl.recv(1024)
-        # print(r)
+        rcv = cl.recv(1024)
+        # print(rcv)
 
-        r = str(r)
+        r = str(rcv)
         print(r)
         led_on = r.find('led=on')
         led_off = r.find('led=off')
@@ -107,11 +112,11 @@ while True:
         print('led_off = ', led_off)
         if led_on > -1:
             print('LED ON')
-            led.value(1)
+            redLed.value(1)
 
         if led_off > -1:
             print('LED OFF')
-            led.value(0)
+            redLed.value(0)
 
         response = get_html('index.html')
         cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')

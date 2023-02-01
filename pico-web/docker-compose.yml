@@ -10,6 +10,8 @@ services:
     volumes:
       - ./projects:/home/projects
       - ./pico-sdk:/home/pico-sdk
+    devices:
+      - COM8:/dev/ttyUSB0
     environment:
       PICO_SDK_PATH: /home/pico-sdk
   #database
