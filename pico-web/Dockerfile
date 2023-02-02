@@ -11,14 +11,15 @@ RUN apt-get update; \
 	apt-get install -y --no-install-recommends python3-pip &&\
 	apt-get install -y --no-install-recommends python3-venv
 
-#RUN apt remove nodejs &&\
-#	rm -rf /usr/local/bin/node* &&\
-#	rm -rf /usr/local/bin/npm* &&\
-#	rm -rf /etc/apt/sources.list.d/nodesource.list
-#	curl -sL https://deb.nodesource.com/setup_19.x | bash - &&\
-#	apt-get update && \
-#	apt-get install -y nodejs &&\
-#	apt-get install -y npm
+RUN apt remove npm &&\
+	apt remove nodejs &&\
+	rm -rf /usr/local/bin/node* &&\
+	rm -rf /usr/local/bin/npm* &&\
+	rm -rf /etc/apt/sources.list.d/nodesource.list &&\
+	curl -sL https://deb.nodesource.com/setup_19.x | bash - &&\
+	apt-get update && \
+	apt-get install -y --no-install-recommends nodejs &&\
+	apt-get install -y --no-install-recommends npm
 
 RUN	cd /tmp && \
 	git clone https://github.com/xdebug/xdebug.git && \

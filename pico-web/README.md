@@ -6,6 +6,8 @@ Pico W Server
 # docker run build
 > docker compose -f docker-compose.yml up --build -d
 
-# console ubuntu
-> winpty docker exec -it pico-w-lcd-picowlcd-1 bash
-> docker exec -it pico-w-lcd-picowlcd-1 /bin/bash
+# open console
+> winpty docker exec -it pico-web-pico-w-1 bash
+> docker exec -it pico-web-pico-w-1 /bin/bash
+
+# on error during docker compose; delete the containers and try again
