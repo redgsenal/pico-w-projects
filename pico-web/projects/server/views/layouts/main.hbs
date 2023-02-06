@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <title>{{page.site}}</title>
 </head>
+
 <body>
     <div class="container">
         <h2 class="title center">Pico W App</h2>
@@ -20,10 +21,11 @@
             {{#if dialog.message}}
             <div class="hidden" id="dialog" title="{{dialog.title}}">{{dialog.message}}</div>
             {{/if}}
-            <form method="POST" action="/LED">
-                <button name="led" value="ON">ON</button>
-                <button name="led" value="OFF">OFF</button>
+            <form method="POST" action="/">
+                <button id="btnon" name="led" value="on">ON</button>
+                <button id="btnoff" name="led" value="off">OFF</button>
             </form>
+            <div class="circle" id="led"></div>
         </div>
     </div>
 
