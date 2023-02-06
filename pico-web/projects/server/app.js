@@ -12,6 +12,7 @@ const app = express();
 const auth = [];
 const page = [];
 const dialog = [];
+const status = [];
 
 const hbs = handlebars.create({
     defaultLayout: 'main',
@@ -58,6 +59,8 @@ conn.connect((err) => {
         auth['pass'] = admin.admin;
         console.log("Server listening on port: ", port);
         console.log("Authentication: ", auth);
+        page['site'] = 'Pico W Web App';
+        status['led'] = 'off';
     });
 });
 
@@ -67,7 +70,31 @@ app.use(basicAuth({
 }));
 
 app.get('/', (req, res) => {
-    page['title'] = "Home";
+    page['title'] = 'Home';
     dialog['message'] = "";
+    console.log(page);
+    console.log(status);
     res.render('home', { page: page, dialog: dialog });
+});
+
+app.post('/LED', (req, res) => {
+    let data = req.body;
+    let led = data.led;
+    status['led'] = led;
+    const result = { "led": led, "success": true };
+    console.log(data);
+    console.log('/POST');
+    console.log(status);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+});
+
+
+app.get('/LED', (req, res) => {
+    let led = status.led;
+    const result = { "led": led, "success": true };
+    console.log('/GET');
+    console.log(status);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
 });

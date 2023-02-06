@@ -4,33 +4,31 @@
     <!-- <meta> tags> -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/libs/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="/css/libs/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="/css/libs/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <title>Pico W Web App</title>
+    <title>{{page.site}}</title>
 </head>
-
 <body>
     <div class="container">
         <h2 class="title center">Pico W App</h2>
         <h3 class="title center">{{page.title}}</h3>
-        <nav>
-            <ul>
-                <li><a href="/LED?status=on">LED ON</a></li>
-                <li><a href="/LED?status=off">LED OFF</a></li>
-            </ul>
-        </nav>
         <div class="content">
             {{{body}}}
             {{#if dialog.message}}
             <div class="hidden" id="dialog" title="{{dialog.title}}">{{dialog.message}}</div>
             {{/if}}
+            <form method="POST" action="/LED">
+                <button name="led" value="ON">ON</button>
+                <button name="led" value="OFF">OFF</button>
+            </form>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="/js/libs/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="/js/libs/jquery-ui.min.js"></script>
     <script src="/js/main.js"></script>
 </body>
 

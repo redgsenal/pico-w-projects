@@ -4,7 +4,8 @@
   "description": "Pico W LCD SPFD5408A",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve" : "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -12,8 +13,8 @@
   },
   "keywords": [
     "pico",
-    "pico",
-    "w",
+    "pico w",
+    "raspberry pi pico",
     "lcd",
     "spfd5408a"
   ],
