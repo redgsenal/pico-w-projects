@@ -11,14 +11,14 @@ RUN apt-get update; \
 	apt-get install -y --no-install-recommends python3-pip &&\
 	apt-get install -y --no-install-recommends python3-venv
 
-RUN apt remove npm &&\
-	apt remove nodejs &&\
-	rm -rf /usr/local/bin/node* &&\
-	rm -rf /usr/local/bin/npm* &&\
-	rm -rf /etc/apt/sources.list.d/nodesource.list &&\
-	curl -sL https://deb.nodesource.com/setup_19.x | bash - &&\
-	apt-get update && \
-	apt-get install -y --no-install-recommends nodejs &&\
+#RUN apt remove npm &&\
+#	apt remove nodejs &&\
+#	rm -rf /usr/local/bin/node* &&\
+#	rm -rf /usr/local/bin/npm* &&\
+#	rm -rf /etc/apt/sources.list.d/nodesource.list &&\
+#	curl -sL https://deb.nodesource.com/setup_18.x | bash - &&\
+#	apt-get update && \
+RUN	apt-get install -y --no-install-recommends nodejs &&\
 	apt-get install -y --no-install-recommends npm
 
 RUN	cd /tmp && \
@@ -48,6 +48,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
 WORKDIR /home/projects
 
 # Expose Port for the Application 
-EXPOSE 80
+EXPOSE 80 8086
 
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]

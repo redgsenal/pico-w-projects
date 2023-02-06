@@ -1,8 +1,8 @@
 let config = {
-    host: 'localhost',
+    host: 'pico-web-db-1',
     user: 'dbuser',
-    port: '3089',
-    password: 'oUwr3148QNCPI27Y',
+    port: '3306',
+    password: 'RaOo81243er6KFZ9',
     database: 'appdb',
     connectionLimit: 10
 };

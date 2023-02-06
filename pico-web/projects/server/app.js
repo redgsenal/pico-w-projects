@@ -27,12 +27,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use(cors());
 
-const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8888;
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8086;
 
 const db = config.database;
 const ConnPool = require('./conn_pool.js');
 const connPool = new ConnPool();
 const conn = connPool.conn;
+
+hbs.handlebars.registerHelper('sanitizeContent', function (currentValue) {
+    return (currentValue == '1' || currentValue == 'true') ? "checked" : "";
+});
+
+hbs.handlebars.registerHelper('isChecked', function (currentValue) {
+    return (currentValue == '1' || currentValue == 'true') ? "checked" : "";
+});
+
+hbs.handlebars.registerHelper('isActiveORVisibleIcon', function (currentValue) {
+    return new hbs.handlebars.SafeString((currentValue == '1' || currentValue == 'true') ? "&#x2705;" : "&#x274C;");
+});
 
 conn.connect((err) => {
     console.log("Connecting to MYSQL database...");

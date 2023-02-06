@@ -6,12 +6,14 @@ services:
       context: .
     restart: 'no'
     ports:
-      - "8086:80"
+      - "8086:8086"
     volumes:
       - ./projects:/home/projects
       - ./pico-sdk:/home/pico-sdk    
     environment:
       PICO_SDK_PATH: /home/pico-sdk
+    networks:
+      - pico-w
   #database
   db:
     image: mysql
