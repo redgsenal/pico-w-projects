@@ -79,11 +79,11 @@ app.get('/', (req, res) => {
 
 app.post('/LED', (req, res) => {
     let data = req.body;
-    let led = data.led;
-    status['led'] = led;
+    let led = data.led.toLowerCase();
     const result = { "led": led, "success": true };
-    console.log(data);
+    status['led'] = led;
     console.log('/POST');
+    console.log('data', data);
     console.log(status);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
