@@ -21,11 +21,17 @@
             {{#if dialog.message}}
             <div class="hidden" id="dialog" title="{{dialog.title}}">{{dialog.message}}</div>
             {{/if}}
-            <form method="POST" action="/">
-                <button id="btnon" name="led" value="on">ON</button>
-                <button id="btnoff" name="led" value="off">OFF</button>
-            </form>
-            <div class="circle" id="led"></div>
+            <div class="box">
+                <form method="POST" action="/">
+                    <button id="btnon" name="led" value="on">ON</button>
+                    <button id="btnoff" name="led" value="off">OFF</button>
+                </form>
+                <div class="circle" id="led1"></div>
+            </div>
+            <div class="box">
+                <p>Pico W button:</p>
+                <div class="circle" id="led2"></div>
+            </div>
         </div>
     </div>
 

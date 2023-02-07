@@ -98,3 +98,12 @@ app.get('/LED', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
 });
+
+app.post('/press', (req, res) => {
+    let data = req.body;
+    let led = data.status.toLowerCase();
+    console.log("led ", led);
+    const result = { "led": led, "success": true };
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+});

@@ -3,7 +3,8 @@ $(function () {
 
     const $btnon = $('#btnon');
     const $btnoff = $('#btnoff');
-    const $led = $('#led');
+    const $rled = $('#led1');
+    const $gled = $('#led2');
     
     function sendPostLed(v) {
         console.log("v", v);
@@ -12,9 +13,9 @@ $(function () {
             .done(function (data) {
                 console.log('data', data);
                 let led = data.led;
-                $led.removeClass('red');
+                $rled.removeClass('red');
                 if (led == 'on'){
-                    $led.addClass('red');
+                    $rled.addClass('red');
                 }
             });
     }
