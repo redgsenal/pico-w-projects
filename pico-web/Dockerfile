@@ -45,9 +45,12 @@ RUN mkdir -p /home/projects
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
 
-WORKDIR /home/projects
+WORKDIR /home/projects/server
+
+#RUN node app.js
 
 # Expose Port for the Application 
 EXPOSE 80 8086
 
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+#CMD ["node", "app.js"]

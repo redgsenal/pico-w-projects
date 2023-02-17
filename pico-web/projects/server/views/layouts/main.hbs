@@ -23,8 +23,15 @@
             {{/if}}
             <div class="box">
                 <form method="POST" action="/">
+                    <textarea id="info" name="msg" rows="10" cols="50"></textarea>
+                    <br/>
+                    <br/>
+                    <button id="btnmsg" name="msginfo">Submit</button>
+                    <br/>
+                    <br/>
                     <button id="btnon" name="led" value="on">ON</button>
                     <button id="btnoff" name="led" value="off">OFF</button>
+                    <br/>
                 </form>
                 <div class="circle" id="led1"></div>
             </div>

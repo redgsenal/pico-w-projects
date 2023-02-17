@@ -5,7 +5,7 @@ const cors = require('cors');
 const request = require('request');
 const handlebars = require('express-handlebars');
 const admin = require('./auth.js');
-const config = require('./config.js');
+//const config = require('./config.js');
 
 const app = express();
 
@@ -30,10 +30,11 @@ app.use(cors());
 
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8086;
 
-const db = config.database;
+// disable db first
+/* const db = config.database;
 const ConnPool = require('./conn_pool.js');
 const connPool = new ConnPool();
-const conn = connPool.conn;
+const conn = connPool.conn; */
 
 hbs.handlebars.registerHelper('sanitizeContent', function (currentValue) {
     return (currentValue == '1' || currentValue == 'true') ? "checked" : "";
@@ -47,7 +48,8 @@ hbs.handlebars.registerHelper('isActiveORVisibleIcon', function (currentValue) {
     return new hbs.handlebars.SafeString((currentValue == '1' || currentValue == 'true') ? "&#x2705;" : "&#x274C;");
 });
 
-conn.connect((err) => {
+// disabled db first
+/* conn.connect((err) => {
     console.log("Connecting to MYSQL database...");
     if (err) {
         console.log("Connection failed! " + JSON.stringify(err, null, 1));
@@ -62,6 +64,16 @@ conn.connect((err) => {
         page['site'] = 'Pico W Web App';
         status['led'] = 'off';
     });
+}); */
+
+app.listen(port, () => {
+    auth['user'] = 'admin';
+    auth['pass'] = admin.admin;
+    console.log("Server listening on port: ", port);
+    console.log("Authentication: ", auth);
+    page['site'] = 'Pico W Web App';
+    status['led'] = 'off';
+    console.log("Web Server ready...");
 });
 
 app.use(basicAuth({
@@ -103,7 +115,28 @@ app.post('/press', (req, res) => {
     let data = req.body;
     let led = data.status.toLowerCase();
     console.log("led ", led);
+    status['led'] = led;
     const result = { "led": led, "success": true };
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+});
+
+app.post('/update', (req, res) => {
+    let data = req.body;
+    let led = status.led;
+    let msg = data.msg.toLowerCase();
+    console.log("msg ", msg);
+    status['msg'] = msg;
+    const result = { "led": led, "msg": msg, success: true };
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+});
+
+app.get('/status', (req, res) => {
+    let result = { "led": status.led, "msg": status.msg, "success": true };
+    console.log('/GET');
+    console.log(status);
+    console.log(result);
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
 });
