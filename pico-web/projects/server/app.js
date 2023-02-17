@@ -73,6 +73,9 @@ app.listen(port, () => {
     console.log("Authentication: ", auth);
     page['site'] = 'Pico W Web App';
     status['led'] = 'off';
+    status['green'] = 'off';
+    status['msg'] = '';
+    status['success'] = false;
     console.log("Web Server ready...");
 });
 
@@ -101,6 +104,17 @@ app.post('/LED', (req, res) => {
     res.end(JSON.stringify(result));
 });
 
+app.post('/green', (req, res) => {
+    let data = req.body;
+    let led = data.led.toLowerCase();
+    const result = { "green": led, "success": true };
+    status['green'] = led;
+    console.log('/POST');
+    console.log('data', data);
+    console.log(status);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+});
 
 app.get('/LED', (req, res) => {
     let led = status.led;
@@ -133,7 +147,7 @@ app.post('/update', (req, res) => {
 });
 
 app.get('/status', (req, res) => {
-    let result = { "led": status.led, "msg": status.msg, "success": true };
+    let result = { "led": status.led, "green": status.green, "msg": status.msg, "success": true };
     console.log('/GET');
     console.log(status);
     console.log(result);
