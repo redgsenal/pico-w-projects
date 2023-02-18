@@ -1,0 +1,1 @@
+socketconfig = {'host': 'localhost', 'port' : 8086};

@@ -1,0 +1,1 @@
+wificonfig = {'ssid': 'myssid', 'pw' : 'aaa'};
