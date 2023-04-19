@@ -41,7 +41,8 @@ RUN pip install rshell
 RUN	rm -rf /var/lib/apt/lists/* && \
 	apt clean
 
-RUN mkdir -p /home/projects
+RUN mkdir -p /home/projects/server
+RUN mkdir -p /home/pico-sdk
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime
 

@@ -9,7 +9,7 @@ services:
       - "8086:8086"
     volumes:
       - ./projects:/home/projects
-      - ./pico-sdk:/home/pico-sdk    
+      - ./pico-sdk:/home/pico-sdk
     environment:
       PICO_SDK_PATH: /home/pico-sdk
     networks:
